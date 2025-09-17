@@ -1,0 +1,35 @@
+services:
+  fsds:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: fsds:latest
+    container_name: fsds_container
+    environment:
+      - SIM_MAP=$SIM_MAP
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - DISPLAY=$DISPLAY
+      - VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json
+    devices:
+      - /dev/snd
+      - /dev/bus/usb
+      - /dev/dri:/dev/dri 
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+      - /usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d:ro 
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu, utility, compute, graphics] 
+    privileged: true
+    network_mode: host
+    ipc: host
+    pid: host
+    shm_size: 8g
+    command: tail -F n
+    tty: true
+    stdin_open: true
