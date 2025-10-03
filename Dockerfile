@@ -12,7 +12,7 @@ RUN apt update &&\
     wget -O kitware-cmake.sh https://apt.kitware.com/kitware-archive.sh &&\
     bash kitware-cmake.sh &&\
     apt update &&\
-    sudo apt purge --auto-remove cmake &&\
+    apt purge --auto-remove cmake &&\
     apt install -y cmake
 
 # Install ROS Jazzy
@@ -32,9 +32,21 @@ RUN apt update && apt install locales -y &&\
     pip3 install rosdep --break-system-packages &&\
     rosdep init && rosdep update
 
-RUN apt-get update && apt-get install -y \
-    libyaml-cpp-dev\
-    rsync
+RUN apt update && apt install -y \
+    libyaml-cpp-dev \
+    rsync \ 
+    tmuxinator \
+    tmux \
+    xvfb \
+    btop
+
+RUN apt update && apt install -y \
+    vulkan-tools \
+    vulkan-validationlayers \
+    mesa-vulkan-drivers \
+    vulkan-utility-libraries-dev \
+    libvulkan1 \
+    libvulkan-dev
 
 RUN useradd -m -s /bin/bash -G video,audio ue4 &&\
     echo 'ue4 ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ue4 &&\
@@ -51,13 +63,4 @@ RUN source /opt/ros/jazzy/setup.bash &&\
     rosdep install --from-paths src --ignore-src -ry &&\
     colcon build
 
-RUN sudo apt-get update && sudo apt-get install -y \
-    vulkan-tools \
-    vulkan-validationlayers \
-    mesa-vulkan-drivers \
-    vulkan-utility-libraries-dev \
-    libvulkan1 \
-    libvulkan-dev
-
-RUN sudo apt install tmuxinator tmux xvfb btop -y
 WORKDIR /home/ue4/Formula-Student-Driverless-Simulator/

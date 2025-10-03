@@ -18,6 +18,7 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
       - /usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d:ro 
+      - ./settings.json:/home/ue4/Formula-Student-Driverless-Simulator/settings.json
     deploy:
       resources:
         reservations:

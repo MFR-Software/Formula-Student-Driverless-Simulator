@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export SIM_MAP=TrainingMap
+source .env
 docker compose up -d
-docker exec -it fsds_container tmuxinator start -p tmuxinator/default_layout.yml
+docker exec -it fsds_container tmuxinator start -p tmuxinator/offscreen.yml
 docker compose down

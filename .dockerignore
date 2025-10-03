@@ -14,3 +14,5 @@ ros
 simulator
 docker
 docs
+
+settings.json

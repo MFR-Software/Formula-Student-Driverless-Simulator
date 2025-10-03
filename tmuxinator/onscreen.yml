@@ -1,0 +1,50 @@
+# ./.tmuxinator.yml
+
+name: simulator_layout
+root: /home/ue4/Formula-Student-Driverless-Simulator/
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# on_project_start: fastdds shm clean
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: source install/local_setup.zsh
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+tmux_options: -f /home/ue4/Formula-Student-Driverless-Simulator/tmuxinator/tmux.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: editor
+
+# Specitifes (by index) which pane of the specified window will be selected on project startup. If not set, the first pane is used.
+# startup_pane: 2
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# on_project_exit: docker compose down
+
+windows:
+   - wheelie_sim:
+      layout: even-horizontal
+      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
+      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
+      # synchronize: after
+      panes:
+         - engine:
+            - cd engine
+            - ./FSDS.sh $SIM_MAP
+         - bridge:
+            - sudo su
+            - mkdir /root/Formula-Student-Driverless-Simulator/
+            - ln -s /home/ue4/Formula-Student-Driverless-Simulator/settings.json /root/Formula-Student-Driverless-Simulator/settings.json
+            - sleep 5
+            - source /home/ue4/Formula-Student-Driverless-Simulator/ros2/install/setup.bash
+            - ros2 launch fsds_ros2_bridge fsds_ros2_bridge.launch.py
+
