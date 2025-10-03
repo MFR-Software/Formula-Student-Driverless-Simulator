@@ -1,0 +1,20 @@
+757, 575 -> rear wheel mid
+913, 575 -> cg
+1000, 575 -> front wheel mid
+204 (6) pixels -> 1 meter 
+calculations done at 205 px/m
+
+r -> cg = 156 pixels -> 0.761 meters
+f -> cg = 87 pixels -> 0.424 meters
+r -> f = 243 pixels -> 1.185 meters
+
+208, 231 -> left
+404, 231 -> right
+
+right to left = 196 px -> 0.956 meters
+
+4.927 m/s^2 acceleration
+
+23.9399 -> 725.2
+8.0259 -> 727.4
+7.25 m/s^2 decelaration
