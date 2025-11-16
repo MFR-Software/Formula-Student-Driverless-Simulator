@@ -18,7 +18,7 @@ def generate_launch_description():
         launch_ros.actions.Node(
             package='fsds_ros2_bridge',
             executable='fsds_ros2_bridge_camera',
-            namespace="fsds/camera", 
+            namespace="", 
             name=camera_name,
             output='screen',
             parameters=[
