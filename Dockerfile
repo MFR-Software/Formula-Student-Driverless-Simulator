@@ -54,6 +54,13 @@ RUN useradd -m -s /bin/bash -G video,audio ue4 &&\
 
 USER ue4    
 COPY --chown=ue4:ue4 . /home/ue4/Formula-Student-Driverless-Simulator/
+WORKDIR /home/ue4/Formula-Student-Driverless-Simulator/
+RUN wget https://github.com/FS-Driverless/Formula-Student-Driverless-Simulator/releases/download/v2.2.0/fsds-v2.2.0-linux.zip &&\
+    unzip fsds-v2.2.0-linux.zip -d engine &&\
+    # Remove the reductant settings file that causing error.
+    rm engine/settings.json &&\ 
+    rm fsds-v2.2.0-linux.zip
+
 RUN /home/ue4/Formula-Student-Driverless-Simulator/AirSim/setup.sh &&\
     /home/ue4/Formula-Student-Driverless-Simulator/AirSim/build.sh
 
@@ -64,8 +71,3 @@ RUN source /opt/ros/jazzy/setup.bash &&\
     colcon build
 
 WORKDIR /home/ue4/Formula-Student-Driverless-Simulator/
-RUN wget https://github.com/FS-Driverless/Formula-Student-Driverless-Simulator/releases/download/v2.2.0/fsds-v2.2.0-linux.zip &&\
-    unzip fsds-v2.2.0-linux.zip -d engine &&\
-    # Remove the reductant settings file that causing error.
-    rm engine/settings.json &&\ 
-    rm fsds-v2.2.0-linux.zip

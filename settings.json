@@ -29,7 +29,7 @@
             "SensorType": 6,
             "Enabled": true,
             "X": 1.20, "Y": 0, "Z": 0.2,
-            "Roll": 0, "Pitch": 0, "Yaw" : 0,
+            "Roll": 0, "Pitch": 0.0, "Yaw" : 0,
             "NumberOfLasers": 16,
             "PointsPerScan": 16384,
             "VerticalFOVUpper": 15,
@@ -59,7 +59,7 @@
             "Z": 0.8,
             "Pitch": 0.0,
             "Roll": 0.0,
-            "Yaw": 0
+            "Yaw": 0.0
         },
           "left_cam": {
             "CaptureSettings": [
@@ -78,6 +78,7 @@
             "Yaw": 0.0
           }
         },
+
         "X": 2, "Y": 0, "Z": 0,
         "Pitch": 0, "Roll": 0, "Yaw": 0
       }
